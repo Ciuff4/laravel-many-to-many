@@ -32,19 +32,31 @@
             <label for="category" class="form-label">Inserisci la categoria:</label>
             <select
             class="form-select d-block"
-            id="category"
-            name="category">
-             <option value="">Scegli una categoria</option>
-             @foreach ($categories as $category )
-                <option value="{{$category->name}}">{{$category->name}}</option>
-             @endforeach
-        </select>
-
+            name="category_id">
+                <option value="">Scegli una categoria</option>
+                @foreach ($categories as $category )
+                   <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            <label for="tag">Spunta i tag del post:</label>
+            @foreach ( $tags as $tag )
+                <div class="d-block">
+                    <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="tag{{$loop->iteration}}"
+                    name="tags[]"
+                    value="{{$tag->id}}">
+                    <label
+                    class="form-check-label"
+                    for="tag{{$loop->iteration}}">
+                      {{$tag->name}}
+                    </label>
+                </div>
+            @endforeach
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
