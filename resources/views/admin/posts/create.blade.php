@@ -30,8 +30,11 @@
 
         <div class="form-group">
             <label for="category" class="form-label">Inserisci la categoria:</label>
-            <select class="form-select d-block" id="category" >
-             <option value="">Scegli una gategoria</option>
+            <select
+            class="form-select d-block"
+            id="category"
+            name="category">
+             <option value="">Scegli una categoria</option>
              @foreach ($categories as $category )
                 <option value="{{$category->name}}">{{$category->name}}</option>
              @endforeach

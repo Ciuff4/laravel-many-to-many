@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{route ('admin.posts.create')}}" class="btn btn-success mb-2">CREATE NEW POST</a>
+<a href="{{route ('admin.posts.create')}}" class="btn btn-success">CREATE NEW POST</a>
 <div>
     <table class="table">
         <thead>
@@ -18,12 +18,12 @@
             <tr>
                 <th scope="row">{{$post->id}}</th>
                 <td>{{$post->title}}</td>
-                <td>{{$post->category->name}}</td>
+                <td>{{$post->category ? $post->category->name : 'no category'}}</td>
                 <td>
                     @forelse ($post->tags as $tag )
-                    <span class="badge barge-danger">{{$tag->name}}</span>
+                    <span class="badge badge-success">{{$tag->name}}</span>
                     @empty
-                    <span>no tags</span>
+                    <span class="badge badge-danger">no tags</span>
                     @endforelse
                 </td>
                 <td class="d-flex">
