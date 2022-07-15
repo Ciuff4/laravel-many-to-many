@@ -56,9 +56,8 @@
                         id="tag{{$loop->iteration}}"
                         name="tags[]"
                         value="{{$tag->id}}"
-                        @if ($tag->id==$post['tags'])
-                        checked
-                        @endif>
+                        {{-- {{$post->tags==$tag->id ? 'checked' : ''}} --}}
+                        >
                         <label
                         class="form-check-label"
                         for="tag{{$loop->iteration}}">
