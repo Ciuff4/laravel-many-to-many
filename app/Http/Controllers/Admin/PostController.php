@@ -50,7 +50,7 @@ class PostController extends Controller
         $new_post->save();
 
         //----------------
-        
+
         if(array_key_exists ('tags', $data)){
             $new_post->tags()->attach($data['tags']);
         }
@@ -78,10 +78,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $post, Category $category, Tag $tag)
     {
-
-        return view('admin.posts.edit',compact('post'));
+        $categories= Category::all();
+        $tags= Tag::all();
+        return view('admin.posts.edit',compact('post','tags','categories'));
     }
 
     /**
@@ -91,9 +92,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        return view('admin.posts.show',compact('post'));
+        $data=$request->all();
+        $post->update($data);
+        //----------------
+
+        if(array_key_exists ('tags', $data)){
+            $new_post->tags()->sync($data['tags']);
+        }else{
+            $new_post->tags()->sync([]);
+        }
+        return redirect()->route('admin.posts.index', $post);
     }
 
     /**
